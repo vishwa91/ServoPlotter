@@ -1,0 +1,1 @@
+avrdude -c usbtiny -p t2313 -U flash:w:main.hex
