@@ -1,1 +1,46 @@
-Will add how to use and essential packages here soon
+ServoPlotter
+Authon:		Vishwanath
+
+A simple 2D plotter
+
+Required electronics:
+1. ATtiny2313
+2. MAX232
+3. 1uF capacitor X 4
+4. 10uF capacitor X 1
+5. DB9 female connector
+6. USB to serial (in case your computer doesnt have a serial port)
+7. 7805 Voltage regulator
+8. Power supply (6V - 9V)
+
+Mechanical components:
+1. Servo motors X 2
+2. Castor wheels
+3. Wooden pieces
+4. Serclips
+
+Software to be installed (Developers only):
+( See links section for websites to get software or help)
+1. python
+2. numpy
+3. scipy
+4. wxpython
+5.pyserial
+6. WinAVR
+7. AVR Studio
+8. eagle (If you want to edit the schematic)
+
+Usage:
+if using through python, just execute the python script. In window, just double click the machine.py scripy. In linux, change to the directory containing the project files and type the following:
+$ python machine.py
+
+Note that the software hasn't been tested on linux. It would be great if someone tests it and gives the results
+
+Drawing:
+Use ctrl+left click to create new points. Once done, press Write points button and then press Plot button
+
+Links:
+1. python: www.python.org
+2. python packages: www.lfd.uci.edu/~gohlke/pythonlibs/
+3. Help on AVR programming: extremeelectronics.co.in
+4. my blog: cyroforge.wordpress.com
