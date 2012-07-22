@@ -7,7 +7,7 @@
 # Public License as published by the Free Software Foundation.
 # ======================================================================
 
-DIR	= spi ir usbtinyisp template util
+DIR	= servoc util
 
 all clean clobber:
 	@for i in $(DIR); do $(MAKE) $(MFLAGS) -C $$i $@; done
