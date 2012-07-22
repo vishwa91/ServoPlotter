@@ -1,0 +1,10 @@
+# Ignore the following files
+
+# Compiling output intermediates
+*.o
+*.elf
+
+# Python and temp files
+*.pyc
+*~
+*.swp
