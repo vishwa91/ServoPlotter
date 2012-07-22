@@ -1,0 +1,14 @@
+The virtual workspace (The GUI) and the real workspace are linked by the
+coordinates file. The data is split into two files, coords.dat and angles.dat.
+
+The coords.dat contains all the reachable coordinates and the angles.dat contains the corresponding angles of the servo motor
+
+The format of coords.dat:
+1. Comments start with #
+2. The format of coordinate is [coord1, coord2]\n
+
+The format of angles.dat:
+1. Comments start with #
+2. The format of angles is [ground servo angle, moving servo angle]\n
+
+This format is strict. These files are parsed by parser.py to extract the information.

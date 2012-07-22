@@ -1,0 +1,14 @@
+This project aims to make an ultra low cost 2D plotter. The target cost
+is 10$ but considering practical constrains, around 20$ is the best target.
+
+The project is split into the following folders:
+
+data:		Contains the data files for the plotter
+firmware:	Contains the firmware files for attiny2313 microcontroller
+mechanics:	Contains files to help constructing the mechanical structure
+pyservo:	Contains the host side control software
+schematic:	The schematic to make the control electronics. It is not necessary
+			to make a PCB but a breadboard will also do.
+
+Each folder has a README to help get started.
+
