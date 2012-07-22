@@ -1,7 +1,7 @@
 '''
-	ServoPlotter: 	Version 1.0
-	Author:			Vishwanath
-	Dependencies:	scipy, wxpython, pyserial
+    ServoPlotter:   Version 1.0
+    Author:         Vishwanath
+    Dependencies:   scipy, wxpython, pyserial
 '''
 
 import serial
@@ -22,7 +22,7 @@ from math import *
     2. Maximum of 100 possible COM ports is assumed.
 '''
 
-POINT_RADIUS = 5		# Constants for GUI
+POINT_RADIUS = 5        # Constants for GUI
 NUM_POINTS = 10
 
 class myogl(wx.Frame):
@@ -51,7 +51,7 @@ class myogl(wx.Frame):
         pic.SetBitmap(self.im)
         pic.SetX(int(self.im.Size[0]/2))
         pic.SetY(int(self.im.Size[1]/2))
-        pic.SetDraggable(False)		# Disable dragging for the background canvas.
+        pic.SetDraggable(False)     # Disable dragging for the background canvas.
                 
         # create a diagram for the canvas.
         diagram = ogl.Diagram()
@@ -135,23 +135,23 @@ class myogl(wx.Frame):
             event.Skip()
             
     def Plot(self,event):
-    	'''
-    		This method will be called when the Plot button is clicked.
-    	'''
-            f = open('points_data.dat')
-            for line in f.readlines():
-                halt = line.index(',')
-                x = int(line[1:halt])
-                y = int(line[halt+1:-2])
-                x -= 148.5
-                y = -y + 210
-                print [x, y], p_approx([x, y])
-                ptp([x, y])
+        '''
+            This method will be called when the Plot button is clicked.
+        '''
+        f = open('points_data.dat')
+        for line in f.readlines():
+            halt = line.index(',')
+            x = int(line[1:halt])
+            y = int(line[halt+1:-2])
+            x -= 148.5
+            y = -y + 210
+            print [x, y], p_approx([x, y])
+            ptp([x, y])
             
     def Write(self,event):
-    	'''
-    		This method is called when the Write button is clicked
-    	'''
+        '''
+            This method is called when the Write button is clicked
+        '''
         data = open('points_data.dat','w')
         for point in self.points:
             x = point.GetX()
@@ -162,10 +162,10 @@ class myogl(wx.Frame):
         data.close()
 
 def dataExtract(line):
-	'''
-		This function parses the given line and returns the angle pair 
-		and the coordinate pair
-	'''
+    '''
+    This function parses the given line and returns the angle pair 
+        and the coordinate pair
+    '''
     comma = line.index(':')
     angle_line = line[:comma]
     coord_line = line[comma+1:-1]
@@ -303,11 +303,11 @@ dev.stopbits = 1
 dev.setTimeout(0.1)
 
 def ptp(point):
-	'''
-		This function is used to move the plotter head from one point
-		to another. This function uses linear interpolation and is 
-		a high level function.
-	'''
+    '''
+        This function is used to move the plotter head from one point
+        to another. This function uses linear interpolation and is 
+        a high level function.
+    '''
     global last_point
     global data_xy
     global data_theta
@@ -351,7 +351,7 @@ for line in workfile.readlines():
     data_xy.append(temp[1])
     data_theta.append(temp[0])
 
-sendData(0.0, 91.0)		# Initialise the position
+sendData(0.0, 91.0)     # Initialise the position
 
 init_point = data_xy[data_theta.index([0.0,91.0])]
 last_point = init_point
