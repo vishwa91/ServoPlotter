@@ -8,6 +8,46 @@
 // ======================================================================
 
 #include "usb.h"
+#define F_CPU 1500000UL
+#include<util/delay.h>
+void PWMinit(void)
+{
+	// fast PWM mode will be used for OCRA and OCRB
+	// we have frequency of oscillations as 1MHz
+	// The prescaling will be 1 to give higher resolution
+	// To get 50Hz, we need the ICR1 value to be 19,999
+	
+	DDRB |= (1<<PB3)|(1<<PB4);			// make the pins output for the PWM channels
+	TCCR1A |= (1<<COM1A1)|(1<<COM1B1);		// clear OC1A,OC1B on match, set when TOP
+
+	// We need fast PWM with TOP compared with ICR1
+	// hence we need mode 14 in waveform generation mode
+	TCCR1A |= (1<<WGM11);
+	TCCR1B |= (1<<WGM13)|(1<<WGM12);
+
+	TCCR1B |= (1<<CS10);					// no prescaling of clock											
+	ICR1 = 19999;							// load 19999 into ICR1 register
+	OCR1A = INITPOS;						// initialise to zero
+	OCR1B = INITPOS;
+}
+
+void updateOCR1A(int angle)
+{
+	uint16_t ocr1a_val = 0;	
+	// we can get a total of 100 steps in between, but we dont need so many
+
+	ocr1a_val = INITPOS + angle *((ENDPOS-INITPOS)/180);
+	OCR1A = ocr1a_val;
+}
+
+void updateOCR1B(int angle)
+{
+	uint16_t ocr1b_val = 0;	
+	// we can get a total of 100 steps in between, but not sure we need so many
+
+	ocr1b_val = INITPOS + angle *((ENDPOS-INITPOS)/180);
+	OCR1B = ocr1b_val;
+}
 
 // ----------------------------------------------------------------------
 // Handle a non-standard SETUP packet.
@@ -37,9 +77,9 @@ extern	void	usb_out ( byte_t* data, byte_t len )
 // ----------------------------------------------------------------------
 extern	int	main ( void )
 {
+	PWMinit();
 	usb_init();
-	for	( ;; )
-	{
+	while(1){
 		usb_poll();
 	}
 }
