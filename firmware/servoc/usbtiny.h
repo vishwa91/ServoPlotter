@@ -31,7 +31,7 @@
 
 // The power requirement of the USB device in mA, or 0 when the device
 // is not bus powered:
-#define	USBTINY_MAX_POWER		50
+#define	USBTINY_MAX_POWER		400
 
 // The USB vendor and device IDs. These values should be unique for
 // every distinct device. You can get your own vendor ID from the USB
@@ -41,16 +41,16 @@
 // else, like for instance vendor ID 0x6666, which is registered as
 // "Prototype product Vendor ID".
 #define	USBTINY_VENDOR_ID		0x6666
-#define	USBTINY_DEVICE_ID		0x0001
+#define	USBTINY_DEVICE_ID		0x0007
 
 // The version of the device as a 16-bit number: 256*major + minor.
 #define	USBTINY_DEVICE_VERSION		0x106
 
 // The following optional macros may be used as an identification of
 // your device. Undefine them when you run out of flash space.
-#define	USBTINY_VENDOR_NAME		"Dick Streefland"
-#define	USBTINY_DEVICE_NAME		"USBtiny Template"
-#define	USBTINY_SERIAL			"0001"
+#define	USBTINY_VENDOR_NAME		"Vishwanath"
+#define	USBTINY_DEVICE_NAME		"Tiny Servo"
+#define	USBTINY_SERIAL			"0007"
 
 // Define the device class, subclass and protocol. Device class 0xff
 // is "vendor specific".
@@ -69,13 +69,13 @@
 // as 1, you have the option of returning 0xff instead. In that case, the
 // USB driver will call a function usb_in() to obtain the data to send
 // back to the host. This can be used to generate the data on-the-fly.
-#define	USBTINY_CALLBACK_IN		0
+#define	USBTINY_CALLBACK_IN		1
 
 // When this macro is defined as 0, OUT packets are simply ignored.
 // When defined as 1, the function usb_out() is called for OUT packets.
 // You need this option to send data from the host to the device in
 // a control transfer.
-#define	USBTINY_CALLBACK_OUT		0
+#define	USBTINY_CALLBACK_OUT	1
 
 // When this macro is defined as 1, an optimized CRC function is used
 // that calculates the CRC about twice as fast as the standard version,

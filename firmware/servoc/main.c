@@ -8,8 +8,15 @@
 // ======================================================================
 
 #include "usb.h"
+#include<avr/io.h>
 #define F_CPU 1500000UL
 #include<util/delay.h>
+
+#define INITPOS 530			// ocr value for zero degree position.
+#define ENDPOS  2560		// ocr value for 180 degree position.
+// Please note that INITPOS and ENDPOS must be adjusted according to the particular
+// servo motor. It is NOT constant and needs to be determined by trial and error
+
 void PWMinit(void)
 {
 	// fast PWM mode will be used for OCRA and OCRB
@@ -70,6 +77,31 @@ extern	byte_t	usb_in ( byte_t* data, byte_t len )
 // ----------------------------------------------------------------------
 extern	void	usb_out ( byte_t* data, byte_t len )
 {
+	// Update the servo motor if the packets is correct. Glow an LED else.
+	if(len == 9){
+		// Switch off error LED and switch on busy LED.
+		PORTB &= ~(1 << PB0);
+		PORTB |= (1 << PB1);
+		int angle1 = 0;
+		int angle2 = 0;
+		angle1 += data[3] - '0';			// convert the characters to angles
+		angle1 += 10*(data[2] - '0');
+		angle1 += 100*(data[1] - '0');
+
+		angle2 += data[7] - '0';
+		angle2 += 10*(data[6] - '0');
+		angle2 += 100*(data[5] - '0');
+
+		updateOCR1A(angle1);				// load the timer registers
+		updateOCR1B(angle2);
+		// Switch off busy LED
+		PORTB &= ~(1 << PB1);
+	}
+	else{
+		// The first LED is the red LED, which glows if an error
+		DDRB |= (1 << PB0);
+	}
+		
 }
 
 // ----------------------------------------------------------------------
